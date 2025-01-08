@@ -20,18 +20,13 @@ class JwtUtil(
     val refreshKey: SecretKey = Keys.hmacShaKeyFor(refreshSecretKey.toByteArray(StandardCharsets.UTF_8))
 
     // 한국 시간대에 맞는 Date 객체를 생성하는 함수
-    fun getKoreanTime(): Date {
-        val koreanTimeZone = TimeZone.getTimeZone("Asia/Seoul")
-        val calendar = Calendar.getInstance(koreanTimeZone)
-        return calendar.time
-    }
 
     fun generateToken(email: String): String {
         val claims = mapOf("email" to email)
         return Jwts.builder()
             .claims(claims)
-            .issuedAt(getKoreanTime())
-            .expiration(Date(System.currentTimeMillis() + expiration * 1000 + TimeZone.getTimeZone("Asia/Seoul").rawOffset))
+            .issuedAt(Date())
+            .expiration(Date(System.currentTimeMillis() + expiration * 1000))
             .signWith(key)
             .compact()
     }
@@ -40,8 +35,8 @@ class JwtUtil(
         val claims = mapOf("email" to email)
         return Jwts.builder()
             .claims(claims)
-            .issuedAt(getKoreanTime())
-            .expiration(Date(System.currentTimeMillis() + refreshExpiration * 1000 + TimeZone.getTimeZone("Asia/Seoul").rawOffset))
+            .issuedAt(Date())
+            .expiration(Date(System.currentTimeMillis() + refreshExpiration * 1000))
             .signWith(refreshKey)
             .compact()
     }
