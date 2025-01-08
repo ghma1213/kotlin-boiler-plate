@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: kotlin-boiler-plate
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/boiler?useSSL=false&serverTimezone=UTC
+    username: boiler-plate
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
+
+jwt:
+  secret-key: anCe3pRM4fqif4JLcoEqTPcgUE0UFoJs
+  expiration: 30
+  refresh-secret-key: KRPNuqdbqbT9tNt0StqpYcI8NEGgqlVP
+  refresh-expiration: 60
+
+logging:
+  level:
+    root: INFO
+    com.example.kotlinboilerplate: DEBUG
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} | %5p | %c{1} | %m%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} | %5p | %c{1} | %m%n'
+  file:
+    name: logs/app.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
