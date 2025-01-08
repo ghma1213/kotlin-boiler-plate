@@ -44,9 +44,11 @@ class JwtAuthenticationFilter(
                 // 액세스 토큰이 만료된 경우, 리프레시 토큰을 사용하여 액세스 토큰을 재발급
                 val refreshToken = request.getHeader("Refresh-Token")
                 if (!refreshToken.isNullOrEmpty() && jwtUtil.validateRefreshToken(refreshToken)) {
+                    println("액세스토큰 재발급!")
                     val newToken = jwtUtil.generateToken(refreshToken)
                     response.setHeader("Authorization", "Bearer $newToken")
                 } else {
+                    println("토큰 만료!")
                     response.status = HttpServletResponse.SC_UNAUTHORIZED
                     response.writer.write("Refresh token is required")
                     return

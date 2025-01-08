@@ -19,9 +19,9 @@ spring:
 
 jwt:
   secret-key: anCe3pRM4fqif4JLcoEqTPcgUE0UFoJs
-  expiration: 30
+  expiration: 1
   refresh-secret-key: KRPNuqdbqbT9tNt0StqpYcI8NEGgqlVP
-  refresh-expiration: 60
+  refresh-expiration: 5
 
 logging:
   level:
